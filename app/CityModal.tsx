@@ -18,26 +18,29 @@ const CityModal: React.FC<CityModalProps> = ({ isOpen, onClose, onSubmit }) => {
   };
   return (
     <div style={{ display: isOpen ? "block" : "none" }}>
-      <div className={styles.weatherCondition}>
-        <h2>Enter Your City</h2>
-        <form
-          className={styles.weatherLocation}
-          onSubmit={handleSubmit}
+  <div className="bg-white p-6 rounded-lg shadow-md">
+    <h2 className="text-2xl font-semibold mb-4 text-black">Enter Your City</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="flex items-center">
+        <input
+          className="border border-gray-300 rounded-l-md p-2 flex-grow"
+          placeholder="Enter city name"
+          type="text"
+          id="cityName"
+          name="cityName"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md"
+          type="submit"
         >
-          <input
-            className={styles.input_field}
-            placeholder="Enter city name"
-            type="text"
-            id="cityName"
-            name="cityName"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <button className={styles.search_button} type="submit">
-            Seach
-          </button>
-        </form>
+          Search
+        </button>
       </div>
-    </div>
+    </form>
+  </div>
+</div>
   );
 };
 
