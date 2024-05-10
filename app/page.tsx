@@ -4,15 +4,16 @@ import styles from "./page.module.css";
 
 function getCurrentDate() {
   const currentDate = new Date();
-  const options = { month: "long" };
-  const monthName = currentDate.toLocaleString("en-US", options);
+  const monthName = currentDate.toLocaleString("en-US", { month: "long" }); // Specify format directly as a string
   const date = new Date().getDate() + ", " + monthName;
   return date;
 }
 
+
 const Home = () => {
   const date = getCurrentDate();
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<{ weather: { description: string }[], main: { temp: number }, name: String  } | null>(null);
+
   const [city, setCity] = useState("lahore");
 
   async function fetchData(cityName: string) {
