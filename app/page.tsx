@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
+import CityModal from "./CityModal";
+
 
 function getCurrentDate() {
   const currentDate = new Date();
@@ -11,10 +13,11 @@ function getCurrentDate() {
 
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
   const date = getCurrentDate();
   const [weatherData, setWeatherData] = useState<{ weather: { description: string }[], main: { temp: number }, name: String  } | null>(null);
 
-  const [city, setCity] = useState("lahore");
+  const [city, setCity] = useState("delhi");
 
   async function fetchData(cityName: string) {
     try {
@@ -57,25 +60,21 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <article className={styles.widget}>
-        <form
-          className={styles.weatherLocation}
-          onSubmit={(e) => {
-            e.preventDefault();
-            fetchData(city);
-          }}
-        >
-          <input
-            className={styles.input_field}
-            placeholder="Enter city name"
-            type="text"
-            id="cityName"
-            name="cityName"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <button className={styles.search_button} type="submit">
-            Seach
-          </button>
-        </form>
+      <button
+  className="bg-gradient-to-r from-blue-400 to-blue-700 hover:from-green-500 hover:to-green-800 text-white font-bold py-2 px-4 rounded"
+  onClick={() => setShowModal(true)}
+>
+  Change City
+</button>
+
+<CityModal
+  isOpen={showModal}
+  onClose={() => setShowModal(false)}
+  onSubmit={(cityName) => {
+    fetchData(cityName);
+    setShowModal(false);
+  }}
+/>
         {weatherData ? (
           <>
             <div className={styles.icon_and_weatherInfo}>

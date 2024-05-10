@@ -1,7 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import Logo from "./logo";
-import Button from "./button";
+import dynamic from "next/dynamic";
+
+const DynamicThemeSwitcher = dynamic(() => import('./ThemeSwitcher'), {
+  ssr: false,
+});
 
 const Navbar = ({ toggle }: { toggle: () => void }) => {
   return (
@@ -49,8 +53,8 @@ const Navbar = ({ toggle }: { toggle: () => void }) => {
                 </Link>
               </li>
             </ul>
-            <div className="hidden md:block">
-              <Button />
+            <div>
+              <DynamicThemeSwitcher />
             </div>
           </div>
         </div>

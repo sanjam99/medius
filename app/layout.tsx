@@ -1,6 +1,8 @@
 import Navigation from "./components/navigation";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { cookies } from 'next/headers';
+import {getTheme} from '../app/components/client/Theme'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,8 +16,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme');
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: getTheme }} />
+      </head>
       <body className={inter.className}>
         <Navigation />
         {children}
