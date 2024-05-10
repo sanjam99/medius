@@ -22,7 +22,7 @@ const Home = () => {
   async function fetchData(cityName: string) {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/weather?address=" + cityName
+        "https://main--sanket-weather.netlify.app/api/weather?address=" + cityName
       );
       const jsonData = (await response.json()).data;
       setWeatherData(jsonData);
