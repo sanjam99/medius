@@ -22,7 +22,7 @@ const Home = () => {
   async function fetchData(cityName: string) {
     try {
       const response = await fetch(
-        "https://main--sanket-weather.netlify.app/api/weather?address=" + cityName
+        "api/weather?address=" + cityName
       );
       const jsonData = (await response.json()).data;
       setWeatherData(jsonData);
@@ -34,7 +34,7 @@ const Home = () => {
   async function fetchDataByCoordinates(latitude: number, longitude: number) {
     try {
       const response = await fetch(
-        `https://main--sanket-weather.netlify.app//api/weather?lat=${latitude}&lon=${longitude}`
+        `api/weather?lat=${latitude}&lon=${longitude}`
       );
       const jsonData = (await response.json()).data;
       setWeatherData(jsonData);
